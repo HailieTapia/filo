@@ -27,12 +27,13 @@ export class RegisterComponent implements OnInit {
   ) {
     this.registerForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑäöüÄÖÜ\s]+$/), Validators.minLength(3), Validators.maxLength(20)]],
-      email: ['', [Validators.required, Validators.email], Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)],
+      email: ['', [Validators.required, Validators.email, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]], // Agrupando validadores en un solo arreglo
       telefono: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       tipo_usuario: ['cliente'],
       mfa_activado: [false]
     });
+    
   }
   passwordStrength(password: string): number {
     return zxcvbn(password).score;
